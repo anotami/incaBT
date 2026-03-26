@@ -18,15 +18,13 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    #MainMenu, footer, header { display: none !important; }
-    .stApp, .stApp > div, section.main, section.main > div,
-    .block-container,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stAppViewContainer"] > section,
-    [data-testid="stVerticalBlock"],
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        padding: 0 !important; margin: 0 !important; max-width: 100% !important;
-    }
+    header, #MainMenu, footer { display: none !important; height: 0 !important; }
+    section[data-testid="stMain"]           { padding: 0 !important; }
+    div[data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }
+    div[data-testid="stVerticalBlock"]      { gap: 0 !important; }
+    .block-container { padding: 0 !important; max-width: 100% !important; }
+    section.main     { padding: 0 !important; }
+    .stApp           { margin-top: 0 !important; }
     [data-testid="stSidebar"],
     [data-testid="collapsedControl"] { display: none !important; }
     iframe { width: 100% !important; border: none !important;

@@ -61,14 +61,48 @@ def fix_links(html: str) -> str:
     return html
 
 
-def add_height_reporter(html: str) -> str:
+def add_streamlit_fixes(html: str) -> str:
     """
-    Inyecta un script que le informa a Streamlit la altura real del
-    contenido para que el iframe se redimensione automáticamente.
+    Inyecta dos scripts en el HTML:
+    1. Reporta la altura real al iframe de Streamlit para auto-resize.
+    2. Inyecta CSS en el DOM padre (window.parent.document) para eliminar
+       el padding/header de Streamlit — funciona porque comparten origen.
     """
     script = """
 <script>
 (function () {
+
+  /* ---- 1. Eliminar padding del DOM padre (Streamlit chrome) ---- */
+  function fixParent() {
+    try {
+      var pd = window.parent.document;
+      if (!pd) return;
+
+      /* Ocultar header y quitar el padding-top que genera */
+      var rules = [
+        'header { display: none !important; height: 0 !important; }',
+        /* Streamlit 1.32+ */
+        'section[data-testid="stMain"]          { padding-top: 0 !important; margin-top: 0 !important; }',
+        'div[data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }',
+        'div[data-testid="stVerticalBlock"]      { gap: 0 !important; }',
+        /* Versiones anteriores */
+        '.block-container { padding: 0 !important; max-width: 100% !important; }',
+        'section.main     { padding-top: 0 !important; }',
+        /* El iframe en sí */
+        'iframe { display: block !important; vertical-align: top !important; margin: 0 !important; }',
+      ];
+
+      var existing = pd.getElementById('__st_fix__');
+      if (!existing) {
+        var s = pd.createElement('style');
+        s.id = '__st_fix__';
+        s.innerHTML = rules.join('\\n');
+        pd.head.appendChild(s);
+      }
+    } catch(e) { /* cross-origin: ignorar */ }
+  }
+
+  /* ---- 2. Reportar altura real para auto-resize del iframe ---- */
   function reportHeight() {
     var h = Math.max(
       document.body.scrollHeight,
@@ -80,12 +114,16 @@ def add_height_reporter(html: str) -> str:
       "*"
     );
   }
+
+  fixParent();
   window.addEventListener("load", function () {
+    fixParent();
     reportHeight();
-    setTimeout(reportHeight, 600);
-    setTimeout(reportHeight, 1500);
-    setTimeout(reportHeight, 3500);
+    setTimeout(function(){ fixParent(); reportHeight(); }, 600);
+    setTimeout(reportHeight, 2000);
+    setTimeout(reportHeight, 4000);
   });
+
 })();
 </script>"""
     return html.replace("</body>", script + "\n</body>")
@@ -98,5 +136,5 @@ def prepare_page(html_file: str, base_dir: Path) -> str:
     html = inline_js(html, base_dir)
     html = inline_svgs(html, base_dir)
     html = fix_links(html)
-    html = add_height_reporter(html)
+    html = add_streamlit_fixes(html)
     return html

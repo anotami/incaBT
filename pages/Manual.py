@@ -18,11 +18,19 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    #MainMenu, footer, header { visibility: hidden; height: 0; }
-    .block-container { padding: 0 !important; max-width: 100% !important; }
+    #MainMenu, footer, header { display: none !important; }
+    .stApp, .stApp > div, section.main, section.main > div,
+    .block-container,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section,
+    [data-testid="stVerticalBlock"],
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        padding: 0 !important; margin: 0 !important; max-width: 100% !important;
+    }
     [data-testid="stSidebar"],
     [data-testid="collapsedControl"] { display: none !important; }
-    iframe { width: 100% !important; border: none !important; display: block !important; }
+    iframe { width: 100% !important; border: none !important;
+             display: block !important; margin: 0 !important; vertical-align: top !important; }
     </style>
     """,
     unsafe_allow_html=True,

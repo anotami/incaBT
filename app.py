@@ -12,21 +12,40 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# Ocultar chrome de Streamlit y hacer el iframe full-width
+# Elimina TODO el padding/margin de Streamlit y hace el iframe flush al tope
 st.markdown(
     """
     <style>
-    #MainMenu, footer, header { visibility: hidden; height: 0; }
-    .block-container {
+    /* Ocultar chrome */
+    #MainMenu, footer, header { display: none !important; }
+
+    /* Quitar padding de TODOS los contenedores de Streamlit */
+    .stApp,
+    .stApp > div,
+    section.main,
+    section.main > div,
+    .block-container,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stAppViewContainer"] > section,
+    [data-testid="stVerticalBlock"],
+    [data-testid="stVerticalBlockBorderWrapper"] {
         padding: 0 !important;
+        margin: 0 !important;
         max-width: 100% !important;
     }
+
+    /* Sidebar oculto */
     [data-testid="stSidebar"],
     [data-testid="collapsedControl"] { display: none !important; }
+
+    /* iframe sin bordes ni desplazamiento propio */
     iframe {
         width: 100% !important;
         border: none !important;
         display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        vertical-align: top !important;
     }
     </style>
     """,

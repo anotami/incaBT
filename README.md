@@ -1,6 +1,6 @@
 # TU NOMBRE — Sitio web del proyecto
 
-Clon del sitio pocketgone.com con contenido de Nerdearla 2025.
+Sitio web del proyecto CALLADO BT — presentado en Nerdearla 2025.
 
 ## Personalización antes de publicar
 

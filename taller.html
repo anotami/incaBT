@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taller Virtual — CALLADO BT</title>
+  <meta name="description" content="Taller virtual para armar CALLADO BT: herramienta de diagnóstico y silenciamiento Bluetooth. Aprende a construirlo paso a paso.">
+
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/taller.css">
+</head>
+<body class="taller-page">
+
+  <!-- PRELOADER -->
+  <div class="preloader">
+    <div class="preloader-inner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="index.html" class="navbar-brand">CALLADO BT</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="index.html"><span>Inicio</span></a></li>
+          <li class="active"><a href="taller.html"><span>Taller</span></a></li>
+          <li><a href="index.html#historia"><span>Historia</span></a></li>
+          <li><a href="index.html#tecnico"><span>Técnico</span></a></li>
+          <li><a href="index.html#demos"><span>Demos</span></a></li>
+          <li><a href="index.html#faq"><span>FAQ</span></a></li>
+          <li><a href="manual.html"><span>Manual</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO del taller -->
+  <section class="taller-hero">
+    <div class="taller-hero-bg"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center wow fadeInUp">
+          <p class="taller-eyebrow">TALLER VIRTUAL</p>
+          <h1 class="taller-title">Armá tu<br><span>CALLADO BT</span></h1>
+          <p class="taller-subtitle">
+            Aprendé a construir tu propio dispositivo de diagnóstico y silenciamiento Bluetooth.
+            Sin conocimientos previos. Solo un destornillador, un cable USB y un navegador.
+          </p>
+          <div class="taller-price-box">
+            <span class="taller-price">u$25</span>
+            <span class="taller-price-desc">acceso completo · sin vencimiento</span>
+          </div>
+          <a href="mailto:acordatemidire@gmail.com?subject=Quiero%20anotarme%20al%20taller%20CALLADO%20BT" class="btn btn-cta btn-lg">
+            <i class="fa fa-envelope"></i> &nbsp;Anotarme ahora
+          </a>
+          <p class="taller-contact-hint">o escribí directamente a <a href="mailto:acordatemidire@gmail.com">acordatemidire@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUÉ INCLUYE ===== -->
+  <section class="taller-section" id="incluye">
+    <div class="container">
+      <h2 class="section-title wow fadeInUp">Qué incluye el taller</h2>
+      <div class="row wow fadeInUp">
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-list-ul fa-3x"></i>
+            <h4>Lista de materiales</h4>
+            <p>
+              Solo dos componentes: la placa ESP32-C3 y el módulo CC2500.
+              Con links a Amazon y tiendas locales. Costo total aproximado u$15.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-download fa-3x"></i>
+            <h4>Firmware compilado</h4>
+            <p>
+              El archivo .bin listo para flashear. No hace falta programar nada:
+              solo conectar la placa por USB y seguir los pasos del instructivo.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-cube fa-3x"></i>
+            <h4>Gabinete 3D</h4>
+            <p>
+              Archivos STL para imprimir el gabinete. No hace falta tener impresora:
+              podés mandarlo a imprimir o usar una caja genérica de electrónica.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row wow fadeInUp" style="margin-top:20px">
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-video-camera fa-3x"></i>
+            <h4>Video paso a paso</h4>
+            <p>
+              Instructivo en video completo: desde la compra de los componentes
+              hasta la primera puesta en marcha del dispositivo.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-file-pdf-o fa-3x"></i>
+            <h4>Manual PDF</h4>
+            <p>
+              Manual técnico completo en PDF con diagramas de conexión,
+              descripción de modos de operación y guía de diagnóstico.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="taller-card">
+            <i class="fa fa-comments fa-3x"></i>
+            <h4>Soporte por email</h4>
+            <p>
+              Canal de soporte directo. Si algo no funciona como esperás,
+              respondemos en menos de 24 hs para ayudarte a resolverlo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PASOS ===== -->
+  <section class="taller-section taller-section--dark" id="pasos">
+    <div class="container">
+      <h2 class="section-title wow fadeInUp">Cómo funciona el taller</h2>
+      <div class="row wow fadeInUp">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="steps-list">
+
+            <div class="step-item">
+              <div class="step-number">01</div>
+              <div class="step-content">
+                <h4>Te anotás</h4>
+                <p>Mandás un mail a <a href="mailto:acordatemidire@gmail.com">acordatemidire@gmail.com</a> con el asunto "Taller CALLADO BT". Te respondemos con los datos de pago.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">02</div>
+              <div class="step-content">
+                <h4>Recibís el material</h4>
+                <p>Una vez confirmado el pago, recibís por email el link de descarga con: lista de componentes, firmware, archivos 3D, video instructivo y manual PDF.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">03</div>
+              <div class="step-content">
+                <h4>Comprás los componentes</h4>
+                <p>Dos piezas que conseguís en Amazon o tiendas de electrónica locales. Costo total aproximado u$15. El taller incluye links actualizados.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">04</div>
+              <div class="step-content">
+                <h4>Flasheás la placa</h4>
+                <p>Con el navegador (Chrome o Edge) y el cable USB conectás la placa y cargás el firmware. Sin instalar nada extra. El video muestra cada paso.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">05</div>
+              <div class="step-content">
+                <h4>Armás el gabinete</h4>
+                <p>Conectás los dos módulos (un cable de 4 pines), los metés en el gabinete y cerrás con dos tornillos. Listo.</p>
+              </div>
+            </div>
+
+            <div class="step-item">
+              <div class="step-number">06</div>
+              <div class="step-content">
+                <h4>¡Tu CALLADO BT está listo!</h4>
+                <p>Conectás el USB-C a una batería portátil y el dispositivo empieza a operar. En modo diagnóstico ves el espectro BT en el monitor serial.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPONENTES ===== -->
+  <section class="taller-section" id="componentes">
+    <div class="container">
+      <h2 class="section-title wow fadeInUp">Los dos componentes</h2>
+      <div class="row wow fadeInUp">
+        <div class="col-md-5 col-md-offset-1">
+          <div class="component-card">
+            <div class="component-img">
+              <img src="images/gallery-img3.svg" alt="Componentes CALLADO BT">
+            </div>
+            <div class="component-info">
+              <span class="component-number">①</span>
+              <h4>Placa ESP32-C3</h4>
+              <p>Microcontrolador con WiFi y Bluetooth integrado. Varios modelos compatibles.</p>
+              <span class="component-price">~u$9</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="component-card">
+            <div class="component-img">
+              <img src="images/gallery-img1.svg" alt="Módulo CC2500">
+            </div>
+            <div class="component-info">
+              <span class="component-number">②</span>
+              <h4>Módulo CC2500</h4>
+              <p>Módulo de radiofrecuencia 2.4 GHz. Compatible con antena Peach Cantenna.</p>
+              <span class="component-price">~u$6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row wow fadeInUp">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <div class="tools-box">
+            <h4><i class="fa fa-wrench"></i> Herramientas necesarias</h4>
+            <div class="tools-grid">
+              <div class="tool-item"><i class="fa fa-usb"></i><span>Cable USB-C</span></div>
+              <div class="tool-item"><i class="fa fa-chrome"></i><span>Navegador Chrome o Edge</span></div>
+              <div class="tool-item"><i class="fa fa-cog"></i><span>Destornillador pequeño</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PREGUNTAS FRECUENTES ===== -->
+  <section class="taller-section taller-section--dark" id="faq-taller">
+    <div class="container">
+      <h2 class="section-title wow fadeInUp">Preguntas sobre el taller</h2>
+      <div class="row wow fadeInUp">
+        <div class="col-md-8 col-md-offset-2">
+
+          <div class="faq-item">
+            <h4>¿Hay fecha límite para el taller?</h4>
+            <p>No. El acceso es permanente. Una vez que lo compraste, el material es tuyo sin vencimiento.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>¿Puedo hacerlo a mi ritmo?</h4>
+            <p>Sí. No hay clases en vivo ni horarios. Descargás el material y lo hacés cuando quieras.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>¿Qué pasa si tengo dudas durante el armado?</h4>
+            <p>Escribís a <a href="mailto:acordatemidire@gmail.com">acordatemidire@gmail.com</a> y te respondemos.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>¿Tengo una versión anterior, hay descuento?</h4>
+            <p>Sí. Los que ya compraron versiones anteriores tienen 50% de descuento. Mencionálo en tu mail.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>¿Se puede pagar en pesos?</h4>
+            <p>Sí. Escribinos y te damos los medios de pago disponibles en Argentina.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>¿Hay una versión con la Peach Cantenna incluida?</h4>
+            <p>La cantenna se arma por separado con una lata de duraznos y unos pocos materiales. El manual incluye las instrucciones completas.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="taller-cta">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center wow fadeInUp">
+          <h2 class="taller-cta-title">¿Listo para armarlo?</h2>
+          <p class="taller-cta-desc">
+            u$25 · acceso sin vencimiento · soporte por email incluido
+          </p>
+          <a href="mailto:acordatemidire@gmail.com?subject=Quiero%20anotarme%20al%20taller%20CALLADO%20BT" class="btn btn-cta btn-lg">
+            <i class="fa fa-envelope"></i> &nbsp;Anotarme al taller
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        CALLADO BT es un proyecto maker experimental y educativo y no un producto comercial.
+        No hay ninguna garantía de que sus estimaciones de diagnóstico sean fiables o que
+        funcione para un caso o distancia en particular. Consultar la legislación vigente
+        y usar solo en ámbitos privados, sin afectar dispositivos de terceros.
+      </p>
+      <p style="margin-top:10px; opacity:0.5; font-size:12px;">
+        Contacto: <a href="mailto:acordatemidire@gmail.com" style="color:rgba(255,255,255,0.6)">acordatemidire@gmail.com</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Botón ir arriba -->
+  <a href="#top" class="go-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="js/taller.js"></script>
+</body>
+</html>

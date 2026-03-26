@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a3a5c"/>
+      <stop offset="100%" stop-color="#0a0f1a"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg1)"/>
+  <!-- Grid lines -->
+  <g stroke="#1e4d7a" stroke-width="0.5" opacity="0.4">
+    <line x1="0" y1="120" x2="1920" y2="120"/><line x1="0" y1="240" x2="1920" y2="240"/>
+    <line x1="0" y1="360" x2="1920" y2="360"/><line x1="0" y1="480" x2="1920" y2="480"/>
+    <line x1="0" y1="600" x2="1920" y2="600"/><line x1="0" y1="720" x2="1920" y2="720"/>
+    <line x1="0" y1="840" x2="1920" y2="840"/><line x1="0" y1="960" x2="1920" y2="960"/>
+    <line x1="160" y1="0" x2="160" y2="1080"/><line x1="320" y1="0" x2="320" y2="1080"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/><line x1="640" y1="0" x2="640" y2="1080"/>
+    <line x1="800" y1="0" x2="800" y2="1080"/><line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1120" y1="0" x2="1120" y2="1080"/><line x1="1280" y1="0" x2="1280" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/><line x1="1600" y1="0" x2="1600" y2="1080"/>
+    <line x1="1760" y1="0" x2="1760" y2="1080"/>
+  </g>
+  <!-- Device outline -->
+  <g transform="translate(810,290)" filter="url(#glow)">
+    <rect x="0" y="0" width="300" height="200" rx="16" fill="none" stroke="#2e86de" stroke-width="2.5"/>
+    <rect x="15" y="15" width="270" height="170" rx="10" fill="#0d2137" stroke="#1a5276" stroke-width="1"/>
+    <!-- PCB traces -->
+    <line x1="40" y1="50" x2="120" y2="50" stroke="#27ae60" stroke-width="1.5"/>
+    <line x1="120" y1="50" x2="120" y2="100" stroke="#27ae60" stroke-width="1.5"/>
+    <line x1="120" y1="100" x2="200" y2="100" stroke="#27ae60" stroke-width="1.5"/>
+    <line x1="160" y1="50" x2="260" y2="50" stroke="#e74c3c" stroke-width="1"/>
+    <line x1="40" y1="130" x2="80" y2="130" stroke="#27ae60" stroke-width="1"/>
+    <line x1="200" y1="130" x2="260" y2="130" stroke="#27ae60" stroke-width="1"/>
+    <!-- ESP32 chip -->
+    <rect x="90" y="65" width="80" height="55" rx="4" fill="#1a5276" stroke="#2e86de" stroke-width="1.5"/>
+    <text x="130" y="97" text-anchor="middle" font-family="monospace" font-size="10" fill="#7fb3d3">ESP32</text>
+    <!-- LED indicators -->
+    <circle cx="50" cy="155" r="6" fill="#00e676" opacity="0.9"/>
+    <circle cx="70" cy="155" r="6" fill="#e74c3c" opacity="0.8"/>
+    <!-- USB-C port -->
+    <rect x="235" y="88" width="28" height="14" rx="3" fill="#566573" stroke="#aab7b8" stroke-width="1"/>
+    <!-- BT symbol -->
+    <text x="200" y="75" font-family="monospace" font-size="18" fill="#2e86de" opacity="0.8">&#x2B56;</text>
+    <!-- Antenna connector -->
+    <circle cx="150" cy="195" r="5" fill="#f39c12" stroke="#e67e22" stroke-width="1"/>
+  </g>
+  <!-- Antenna -->
+  <g transform="translate(945,200)" filter="url(#glow)">
+    <line x1="15" y1="90" x2="15" y2="10" stroke="#2e86de" stroke-width="3"/>
+    <line x1="15" y1="10" x2="35" y2="30" stroke="#2e86de" stroke-width="2"/>
+    <line x1="35" y1="30" x2="35" y2="70" stroke="#2e86de" stroke-width="2"/>
+    <line x1="35" y1="50" x2="15" y2="70" stroke="#2e86de" stroke-width="2"/>
+    <!-- Signal waves -->
+    <path d="M50,50 Q65,30 50,10" stroke="#00d2ff" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M60,50 Q80,20 60,0" stroke="#00d2ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M70,50 Q95,10 70,-10" stroke="#00d2ff" stroke-width="1.5" fill="none" opacity="0.3"/>
+  </g>
+  <!-- Title text -->
+  <text x="960" y="600" text-anchor="middle" font-family="Arial,sans-serif" font-size="64" font-weight="300" letter-spacing="20" fill="rgba(255,255,255,0.06)" text-transform="uppercase">CALLADO BT</text>
+</svg>

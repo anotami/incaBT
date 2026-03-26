@@ -5,10 +5,10 @@ $(document).ready(function () {
   ===================================================== */
   $.vegas('slideshow', {
     backgrounds: [
-      { src: 'images/hero-bg1.jpg' },
-      { src: 'images/hero-bg2.jpg' },
-      { src: 'images/hero-bg3.jpg' },
-      { src: 'images/hero-bg4.jpg' }
+      { src: 'images/hero-bg1.svg' },
+      { src: 'images/hero-bg2.svg' },
+      { src: 'images/hero-bg3.svg' },
+      { src: 'images/hero-bg4.svg' }
     ],
     delay:    5000,
     transition: 'fade',

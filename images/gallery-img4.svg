@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#0a1520"/>
+  <text x="400" y="45" text-anchor="middle" font-family="Arial" font-size="20" font-weight="300" letter-spacing="6" fill="rgba(255,255,255,0.85)">PEACH CANTENNA</text>
+  <text x="400" y="68" text-anchor="middle" font-family="monospace" font-size="10" fill="#5dade2" letter-spacing="3">ANTENA CASERA 2.4 GHz</text>
+
+  <!-- Peach can body -->
+  <g transform="translate(290,100)">
+    <!-- Can cylinder -->
+    <rect x="30" y="50" width="160" height="320" rx="15" fill="#c0392b" stroke="#922b21" stroke-width="2"/>
+    <!-- Can top -->
+    <ellipse cx="110" cy="50" rx="80" ry="20" fill="#e74c3c" stroke="#922b21" stroke-width="1.5"/>
+    <!-- Can bottom -->
+    <ellipse cx="110" cy="370" rx="80" ry="20" fill="#922b21" stroke="#7b241c" stroke-width="1.5"/>
+    <!-- Label "DURAZNOS" -->
+    <rect x="35" y="110" width="150" height="180" rx="5" fill="rgba(255,220,150,0.15)"/>
+    <!-- Peach illustration (simplified) -->
+    <circle cx="110" cy="175" r="45" fill="#f39c12" opacity="0.7"/>
+    <circle cx="125" cy="160" r="35" fill="#e67e22" opacity="0.5"/>
+    <!-- Leaf -->
+    <path d="M110,130 Q130,110 115,95 Q100,110 110,130" fill="#27ae60" opacity="0.8"/>
+    <text x="110" y="240" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="rgba(255,255,255,0.9)" letter-spacing="1">DURAZNOS</text>
+    <text x="110" y="258" text-anchor="middle" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.6)">en almíbar</text>
+    <!-- Lid removed, N-connector at top -->
+    <circle cx="110" cy="50" r="12" fill="#7f8c8d" stroke="#aab7b8" stroke-width="2"/>
+    <circle cx="110" cy="50" r="5" fill="#bdc3c7"/>
+    <!-- Dipole element inside (visible through ghost effect) -->
+    <line x1="110" y1="30" x2="110" y2="-20" stroke="#f39c12" stroke-width="3"/>
+    <line x1="85" y1="-20" x2="135" y2="-20" stroke="#f39c12" stroke-width="2"/>
+    <!-- Coax cable going out bottom -->
+    <path d="M110,390 Q110,430 80,440" stroke="#566573" stroke-width="4" fill="none"/>
+    <path d="M80,440 Q50,450 40,480" stroke="#566573" stroke-width="4" fill="none"/>
+  </g>
+
+  <!-- Small CALLADO BT device connected -->
+  <g transform="translate(60,440)">
+    <rect x="0" y="0" width="130" height="75" rx="10" fill="#1a252f" stroke="#2e86de" stroke-width="2"/>
+    <text x="65" y="35" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,0.7)">CALLADO BT</text>
+    <circle cx="30" cy="55" r="6" fill="#00e676"/>
+    <circle cx="50" cy="55" r="6" fill="#e74c3c"/>
+    <rect x="70" y="48" width="20" height="10" rx="2" fill="#566573"/>
+    <!-- SMA connector on right -->
+    <circle cx="128" cy="37" r="7" fill="#7f8c8d" stroke="#aab7b8" stroke-width="1.5"/>
+    <!-- Coax connection -->
+    <path d="M128,37 Q160,37 200,420" stroke="#566573" stroke-width="3" fill="none" stroke-dasharray="5,3"/>
+  </g>
+
+  <!-- Signal beam from can -->
+  <g transform="translate(510,100)" opacity="0.6">
+    <path d="M0,210 Q60,180 120,210" stroke="#00d2ff" stroke-width="2" fill="none"/>
+    <path d="M0,210 Q80,160 160,210" stroke="#00d2ff" stroke-width="1.5" fill="none" opacity="0.8"/>
+    <path d="M0,210 Q100,140 200,210" stroke="#00d2ff" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M0,210 Q120,110 240,210" stroke="#00d2ff" stroke-width="0.8" fill="none" opacity="0.4"/>
+    <text x="80" y="260" text-anchor="middle" font-family="monospace" font-size="10" fill="#00d2ff">MAYOR ALCANCE</text>
+  </g>
+
+  <!-- Cost annotation -->
+  <text x="400" y="555" text-anchor="middle" font-family="monospace" font-size="12" fill="#f39c12" letter-spacing="1">COSTO: UNA LATA DE DURAZNOS + CONECTOR N + CABLE COAX</text>
+</svg>

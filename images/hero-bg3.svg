@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1622"/>
+      <stop offset="50%" stop-color="#112240"/>
+      <stop offset="100%" stop-color="#060d18"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg3)"/>
+  <!-- Hex grid background -->
+  <g stroke="#163256" stroke-width="0.6" fill="none" opacity="0.5">
+    <polygon points="100,60 140,60 160,95 140,130 100,130 80,95" />
+    <polygon points="200,60 240,60 260,95 240,130 200,130 180,95" />
+    <polygon points="300,60 340,60 360,95 340,130 300,130 280,95" />
+    <polygon points="150,130 190,130 210,165 190,200 150,200 130,165" />
+    <polygon points="250,130 290,130 310,165 290,200 250,200 230,165" />
+    <polygon points="350,130 390,130 410,165 390,200 350,200 330,165" />
+    <polygon points="1500,800 1540,800 1560,835 1540,870 1500,870 1480,835" />
+    <polygon points="1600,800 1640,800 1660,835 1640,870 1600,870 1580,835" />
+    <polygon points="1700,800 1740,800 1760,835 1740,870 1700,870 1680,835" />
+    <polygon points="1550,870 1590,870 1610,905 1590,940 1550,940 1530,905" />
+    <polygon points="1650,870 1690,870 1710,905 1690,940 1650,940 1630,905" />
+  </g>
+  <!-- Cantenna / can antenna representation -->
+  <g transform="translate(820,240)">
+    <!-- Can body -->
+    <rect x="60" y="80" width="180" height="280" rx="12" fill="#1a252f" stroke="#2e86de" stroke-width="2"/>
+    <!-- Can top/bottom ridges -->
+    <ellipse cx="150" cy="80" rx="90" ry="18" fill="#243342" stroke="#2e86de" stroke-width="1.5"/>
+    <ellipse cx="150" cy="360" rx="90" ry="18" fill="#243342" stroke="#1a5276" stroke-width="1.5"/>
+    <!-- Peach label simulation -->
+    <rect x="65" y="130" width="170" height="180" rx="5" fill="#c0392b" opacity="0.2"/>
+    <text x="150" y="225" text-anchor="middle" font-family="Arial" font-size="14" fill="rgba(255,255,255,0.5)" letter-spacing="2">PEACH</text>
+    <text x="150" y="245" text-anchor="middle" font-family="Arial" font-size="10" fill="rgba(255,255,255,0.35)" letter-spacing="1">CANTENNA</text>
+    <!-- N-connector -->
+    <rect x="135" y="58" width="30" height="28" rx="4" fill="#7f8c8d" stroke="#aab7b8" stroke-width="1"/>
+    <circle cx="150" cy="58" r="8" fill="#566573" stroke="#aab7b8" stroke-width="1"/>
+    <!-- Antenna element inside -->
+    <line x1="150" y1="50" x2="150" y2="10" stroke="#f39c12" stroke-width="3"/>
+    <!-- Signal waves -->
+    <path d="M175,30 Q210,5 175,-20" stroke="#00d2ff" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M195,30 Q240,0 195,-30" stroke="#00d2ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M215,30 Q270,-5 215,-40" stroke="#00d2ff" stroke-width="1" fill="none" opacity="0.3"/>
+  </g>
+  <!-- Small device connected by coax -->
+  <g transform="translate(1100,440)">
+    <line x1="-70" y1="30" x2="0" y2="30" stroke="#7f8c8d" stroke-width="4" stroke-dasharray="4,2"/>
+    <rect x="0" y="0" width="120" height="70" rx="10" fill="#0d1b2a" stroke="#2e86de" stroke-width="2"/>
+    <circle cx="30" cy="35" r="6" fill="#00e676"/>
+    <circle cx="90" cy="35" r="6" fill="#e74c3c"/>
+    <rect x="50" y="15" width="35" height="30" rx="4" fill="#1a3a5c" stroke="#2e86de" stroke-width="1"/>
+    <text x="67" y="34" text-anchor="middle" font-family="monospace" font-size="8" fill="#5dade2">ESP32</text>
+    <!-- USB-C -->
+    <rect x="50" y="63" width="20" height="10" rx="3" fill="#566573"/>
+  </g>
+</svg>

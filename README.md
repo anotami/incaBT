@@ -1,43 +1,73 @@
-# TU NOMBRE — Sitio web del proyecto
+# CALLADO BT — Sitio web del proyecto
 
-Sitio web del proyecto CALLADO BT — presentado en Nerdearla 2025.
+Sitio web de **CALLADO BT**: herramienta maker de diagnóstico y silenciamiento Bluetooth, presentada en Nerdearla 2025.
 
-## Personalización antes de publicar
+## Lo que falta completar
 
-Reemplazar en `index.html`:
-- `TU NOMBRE` → nombre real del proyecto/dispositivo
-- `tu@email.com` → email de contacto real
-- `TU-LINK-TALLER` → URL del taller virtual
-- `TU-LINK-MANUAL` → URL del manual PDF
-- `TU-LINK-CANTENNA` → URL del tutorial de Cantenna
-- `TU-VIDEO-MEDIOS-1` / `TU-VIDEO-MEDIOS-2` → IDs de YouTube reales
+### 1. Videos de YouTube — sección "En los medios"
+En `index.html`, reemplazar los dos IDs de embed de la sección "En los medios":
+```
+src="https://www.youtube.com/embed/TU-VIDEO-MEDIOS-1"
+src="https://www.youtube.com/embed/TU-VIDEO-MEDIOS-2"
+```
+Reemplazar `TU-VIDEO-MEDIOS-1` y `TU-VIDEO-MEDIOS-2` con los IDs reales de YouTube (ej: `dQw4w9WgXcQ`).
 
-Reemplazar en `images/`:
-- `hero-bg1.jpg` – `hero-bg4.jpg` → fotos del dispositivo para el slideshow
-- `gallery-img1.jpg` – `gallery-img4.jpg` → fotos del producto para el carrusel
+### 2. Fotos reales del dispositivo
+Las imágenes actuales son ilustraciones SVG generadas. Reemplazar con fotos reales en `images/`:
+
+| Archivo | Contenido sugerido |
+|---|---|
+| `hero-bg1.svg` | Foto del dispositivo sobre fondo oscuro |
+| `hero-bg2.svg` | Foto cenital / vista aérea del PCB |
+| `hero-bg3.svg` | Foto con la Peach Cantenna conectada |
+| `hero-bg4.svg` | Foto del dispositivo en mano |
+| `gallery-img1.svg` | Versión 4D — foto del gabinete terminado |
+| `gallery-img2.svg` | Foto mostrando los LEDs encendidos |
+| `gallery-img3.svg` | Foto del montaje / dos componentes |
+| `gallery-img4.svg` | Foto de la Peach Cantenna |
+
+Se pueden usar `.jpg` o `.png` — actualizar las referencias en `index.html` y `js/custom.js` si se cambia la extensión.
+
+### 3. Precio del taller
+En `taller.html`, revisar y confirmar el precio:
+```html
+<span class="taller-price">u$25</span>
+```
+
+### 4. Medios de pago
+En `taller.html`, la sección FAQ menciona pagos en pesos. Completar con los métodos reales (Mercado Pago, transferencia, etc.) o eliminar esa pregunta si no aplica.
+
+---
 
 ## Publicar en GitHub Pages
 
-1. Subir el repositorio a GitHub (si no está ya):
-   ```bash
-   git remote add origin https://github.com/TU-USUARIO/TU-REPO.git
-   git push -u origin main
-   ```
+1. En GitHub → **Settings** → **Pages** → Source: `Deploy from a branch` → Branch: `main` → `/ (root)` → **Save**
+2. El sitio queda en: `https://anotami.github.io/incaBT/`
 
-2. En GitHub → Settings → Pages → Source: `Deploy from a branch` → Branch: `main` → `/ (root)` → Save.
-
-3. El sitio quedará disponible en: `https://TU-USUARIO.github.io/TU-REPO/`
+---
 
 ## Estructura del proyecto
 
 ```
-├── index.html        # Página principal
+├── index.html          # Página principal
+├── taller.html         # Página del taller virtual
+├── manual.html         # Manual técnico con sidebar
 ├── css/
-│   └── style.css     # Estilos
+│   ├── style.css       # Estilos base
+│   ├── taller.css      # Estilos página taller
+│   └── manual.css      # Estilos manual
 ├── js/
-│   └── custom.js     # JavaScript (Vegas, Owl Carousel, WOW, smooth scroll)
+│   ├── custom.js       # Vegas slideshow, Owl Carousel, WOW, smooth scroll
+│   ├── taller.js       # JS de taller.html
+│   └── manual.js       # JS de manual.html
 ├── images/
-│   ├── hero-bg*.jpg  # Fondos del slideshow hero (reemplazar)
-│   └── gallery-img*.jpg  # Fotos del carrusel (reemplazar)
+│   ├── hero-bg1-4.svg  # Fondos slideshow (reemplazar con fotos reales)
+│   └── gallery-img1-4.svg  # Carrusel (reemplazar con fotos reales)
 └── README.md
 ```
+
+---
+
+## Contacto
+
+[acordatemidire@gmail.com](mailto:acordatemidire@gmail.com)

@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TU NOMBRE</title>
+  <meta name="description" content="Herramienta de diagnóstico para parlantes Bluetooth con modo de silenciamiento. Proyecto maker educativo y experimental.">
+
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Vegas slideshow -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.4/vegas.min.css">
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader">
+    <div class="preloader-inner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="#top" class="navbar-brand smoothScroll">TU NOMBRE</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#top"     class="smoothScroll"><span>Inicio</span></a></li>
+          <li><a href="TU-LINK-TALLER" target="_blank"><span>Taller</span></a></li>
+          <li><a href="#historia"  class="smoothScroll"><span>Historia</span></a></li>
+          <li><a href="#tecnico"   class="smoothScroll"><span>Técnico</span></a></li>
+          <li><a href="#demos"     class="smoothScroll"><span>Demos</span></a></li>
+          <li><a href="#faq"       class="smoothScroll"><span>FAQ</span></a></li>
+          <li><a href="TU-LINK-MANUAL" target="_blank"><span>Manual</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="home">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center wow fadeInUp">
+          <h1 class="hero-title">TU NOMBRE</h1>
+          <p class="hero-desc">
+            TU NOMBRE es una herramienta de diagnóstico para parlantes Bluetooth que incluye
+            un modo de silenciamiento. No está a la venta como producto. Para tenerlo es
+            necesario anotarse al taller virtual y armarlo. Solo hace falta un destornillador,
+            un cable USB y un navegador.
+          </p>
+          <p class="hero-email">
+            Consultas a <a href="mailto:tu@email.com">tu@email.com</a>
+          </p>
+          <a href="TU-LINK-TALLER" class="btn btn-cta" target="_blank">
+            Anotarse al taller virtual
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <section id="gallery">
+    <div class="container">
+
+      <!-- CARACTERÍSTICAS TÉCNICAS -->
+      <h1 class="section-title wow fadeInUp">Características técnicas</h1>
+      <div class="row wow fadeInUp">
+        <div class="col-md-6">
+          <ul class="feature-list">
+            <li><i class="fa fa-check-circle"></i> Versión actual: 4D — Octubre 2025</li>
+            <li><i class="fa fa-check-circle"></i> Es portable (39×70×32mm)</li>
+            <li><i class="fa fa-check-circle"></i> Tiene antena direccional</li>
+            <li><i class="fa fa-check-circle"></i> Se alimenta con cable USB tipo C (power bank o fuente DC 5V)</li>
+            <li><i class="fa fa-check-circle"></i> Luz testigo de alimentación y luz de operación</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="feature-list">
+            <li><i class="fa fa-check-circle"></i> Determina los canales Bluetooth congestionados</li>
+            <li><i class="fa fa-check-circle"></i> Muestra dispositivos en modo pair: RSSI, MAC y nombre</li>
+            <li><i class="fa fa-check-circle"></i> Ventana temporal para evitar bloqueo de otras comunicaciones</li>
+            <li><i class="fa fa-check-circle"></i> Limita el modo S a los canales Bluetooth Classic</li>
+            <li><i class="fa fa-check-circle"></i> Compatible con antena Peach Cantenna para mayor alcance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- QUÉ INCLUYE EL TALLER -->
+      <h1 class="section-title wow fadeInUp">Qué incluye el taller virtual</h1>
+      <div class="row wow fadeInUp">
+        <div class="col-md-6 col-md-offset-3">
+          <ul class="taller-list">
+            <li><i class="fa fa-angle-right"></i> Lista de los dos componentes a comprar (aprox. u$15 en total)</li>
+            <li><i class="fa fa-angle-right"></i> Software específico para la placa comprada (bin compilado)</li>
+            <li><i class="fa fa-angle-right"></i> Archivos para imprimir el gabinete en 3D (no hace falta tener impresora)</li>
+            <li><i class="fa fa-angle-right"></i> Instructivo en video paso a paso</li>
+            <li><i class="fa fa-angle-right"></i> Manual PDF completo</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARRUSEL DE FOTOS -->
+      <div class="owl-carousel wow fadeIn">
+        <div class="item">
+          <img src="images/gallery-img1.jpg" alt="Versión 4D">
+          <h4>Versión 4D</h4>
+          <p>Nueva versión con diagnósticos BT.</p>
+          <a href="TU-LINK-TALLER" target="_blank">Ver tutorial</a>
+        </div>
+        <div class="item">
+          <img src="images/gallery-img2.jpg" alt="Operación">
+          <h4>Operación</h4>
+          <p>LED de alimentación y botón trasero.</p>
+          <a href="TU-LINK-TALLER" target="_blank">Ver tutorial</a>
+        </div>
+        <div class="item">
+          <img src="images/gallery-img3.jpg" alt="Montaje simplificado">
+          <h4>Montaje simplificado</h4>
+          <p>Dos componentes a conectar.</p>
+          <a href="TU-LINK-TALLER" target="_blank">Ver tutorial</a>
+        </div>
+        <div class="item">
+          <img src="images/gallery-img4.jpg" alt="Peach Cantenna">
+          <h4>Peach Cantenna</h4>
+          <p>Antena casera para extender el alcance.</p>
+          <a href="TU-LINK-CANTENNA" target="_blank">Ver tutorial</a>
+        </div>
+      </div>
+
+      <!-- ===== HISTORIA ===== -->
+      <section id="historia">
+        <h1 class="section-title wow fadeInUp">La historia detrás del proyecto</h1>
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <p class="story-text">
+              Todo comenzó en febrero de 2024: un vecino empezó a poner música a volumen
+              muy elevado todas las mañanas. A partir de esa circunstancia se desarrollaron
+              dos dispositivos que se volvieron populares en la comunidad maker.
+            </p>
+            <p class="story-text">
+              La contaminación sonora generada por parlantes Bluetooth es un problema real
+              que afecta a muchas personas: familias con hijos con hipersensibilidad auditiva,
+              personas que no pueden descansar o estudiar, y situaciones de conflicto vecinal.
+              Esta herramienta nació como una respuesta maker, experimental y educativa.
+            </p>
+            <p class="story-text">
+              El proyecto fue presentado en Nerdearla 2025 por Roni Bandini — miembro del
+              programa de expertos de Qualcomm/Edge Impulse, orador en TedX y Maker Faire
+              Roma, con proyectos destacados en Wired, Vice, CNN y la BBC.
+            </p>
+          </div>
+        </div>
+
+        <!-- VIDEO CHARLA NERDEARLA -->
+        <div class="row wow fadeInUp">
+          <div class="col-md-10 col-md-offset-1 text-center">
+            <h3 class="subsection-title">Charla completa — Nerdearla 2025</h3>
+            <p class="video-desc">
+              "TU NOMBRE y la aventura de silenciar parlantes" — fundamentos técnicos,
+              implicancias sociales y anécdotas del proceso de creación.
+            </p>
+            <div class="video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/BSzp_WEursA"
+                title="Pocket Gone (y la aventura de silenciar parlantes) - Roni Bandini"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TÉCNICO ===== -->
+      <section id="tecnico">
+        <h1 class="section-title wow fadeInUp">Cómo funciona técnicamente</h1>
+        <div class="row wow fadeInUp">
+          <div class="col-md-4">
+            <div class="tech-card">
+              <i class="fa fa-microchip fa-3x"></i>
+              <h4>Hardware</h4>
+              <p>
+                Solo dos componentes: una placa ESP32 y un módulo de radiofrecuencia.
+                Ambos se consiguen por Amazon o tiendas de electrónica locales
+                por aproximadamente u$15 en total.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="tech-card">
+              <i class="fa fa-code fa-3x"></i>
+              <h4>Software</h4>
+              <p>
+                Escrito en C++ con modos de operación configurables. Incluye límite
+                de canales (solo Bluetooth Classic), ventana temporal de 10 segundos
+                cada 60 segundos para restaurar otras comunicaciones, y modo diagnóstico
+                con salida serial a 115200 baudios.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="tech-card">
+              <i class="fa fa-wifi fa-3x"></i>
+              <h4>Frecuencia</h4>
+              <p>
+                Opera en 2.4 GHz, la banda de Bluetooth Classic. No interfiere con
+                Wi-Fi 5.8 GHz, ni con GPS (1600 MHz), GSM (850–1900 MHz) ni controles
+                de autos (315–433 MHz).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO DIAGNÓSTICO -->
+        <h3 class="subsection-title wow fadeInUp">Modo Diagnóstico</h3>
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <p>Para visualizar la información abrí Arduino IDE → Monitor Serial → 115200 baudios.</p>
+            <div class="terminal-box">
+              <pre>TU NOMBRE 4D - Herramienta de diagnóstico para parlantes Bluetooth
+
+Escaneando canales WIFI...
+Redes WIFI encontradas: 3
+
+Escaneando dispositivos Bluetooth...
+[RSSI: -67] [MAC: A4:C1:38:XX:XX:XX] JBL Flip 6
+[RSSI: -72] [MAC: 00:1A:7D:XX:XX:XX] Sony SRS-XB33
+
+Canal BT más congestionado: CH 7</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- PEACH CANTENNA -->
+        <h3 class="subsection-title wow fadeInUp">Peach Cantenna</h3>
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2 text-center">
+            <p class="story-text">
+              Los precios de las antenas de 2.4 GHz suelen ser elevados. Por este motivo
+              fue desarrollada la Peach Cantenna: una antena casera construida con una lata
+              de duraznos para extender significativamente el alcance del dispositivo.
+            </p>
+          </div>
+        </div>
+
+        <!-- ACTUALIZACIÓN -->
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="upgrade-box">
+              <h4><i class="fa fa-arrow-circle-up"></i> ¿Tenés una versión anterior?</h4>
+              <p>
+                Los que ya compraron el taller para versiones anteriores tienen
+                <strong>50% de descuento</strong> para el taller actual.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EN LOS MEDIOS ===== -->
+      <h1 class="section-title wow fadeInUp">En los medios</h1>
+      <div class="row wow fadeInUp">
+        <div class="col-md-6">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/TU-VIDEO-MEDIOS-1"
+              frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/TU-VIDEO-MEDIOS-2"
+              frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== DEMOS ===== -->
+      <section id="demos">
+        <h1 class="section-title wow fadeInUp">Demos</h1>
+        <div class="row wow fadeInUp">
+          <div class="col-md-6">
+            <div class="video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/vaToShxM9N8"
+                frameborder="0" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/B_DeBmhiZeQ"
+                frameborder="0" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIMITACIONES -->
+        <h3 class="subsection-title wow fadeInUp">Limitaciones del modo silenciamiento</h3>
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2">
+            <ul class="limitations-list">
+              <li>La música tiene que sonar en un parlante Bluetooth Classic emitido desde un dispositivo por Bluetooth.</li>
+              <li>Si el teléfono emisor está muy cerca del parlante, el dispositivo podría no tener la fuerza de señal necesaria.</li>
+              <li>El alcance varía según la ubicación del emisor, del parlante y del dispositivo, y la tecnología del parlante.</li>
+              <li>Solo debe utilizarse con parlantes propios en ámbito privado.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section id="faq">
+        <h1 class="section-title wow fadeInUp">Preguntas frecuentes</h1>
+        <div class="row wow fadeInUp">
+          <div class="col-md-8 col-md-offset-2">
+
+            <div class="faq-item">
+              <h4>¿Las partes se consiguen fácil?</h4>
+              <p>Sí. Fácilmente en Amazon o tiendas de electrónica locales. El costo total es de aproximadamente u$15.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Hace falta tener conocimientos o herramientas específicas?</h4>
+              <p>No. Solo seguir los pasos en video. Las únicas herramientas necesarias son un navegador, un cable USB y un destornillador.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Hace falta tener impresora 3D?</h4>
+              <p>No. Es posible mandar a imprimir las partes o armar un gabinete propio con caja genérica, cartón o plástico.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Puede ser utilizado para abrir autos?</h4>
+              <p>No. Los controles de autos operan entre 315 y 433 MHz. Este dispositivo opera en 2.4 GHz. Son frecuencias completamente distintas.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Puede deshabilitar GPS o GSM?</h4>
+              <p>No. GPS opera en 1600 MHz y GSM entre 850 y 1900 MHz. El dispositivo opera en 2.4 GHz y no interfiere con ninguna de esas frecuencias.</p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Inhibe el Wi-Fi?</h4>
+              <p>
+                No. Wi-Fi opera en 2.4 y 5.8 GHz. El dispositivo no toca los 5.8 GHz. Para la banda de 2.4 GHz,
+                en modo diagnóstico no interrumpe ninguna comunicación. En modo silenciamiento solo actúa sobre
+                los canales de parlantes Bluetooth, con ventana temporal de restauración de 10 segundos cada 60.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4>¿Puede detener marcapasos?</h4>
+              <p>
+                No. Los marcapasos modernos están blindados contra interferencias de RF. El dispositivo opera
+                en 2.4 GHz con baja potencia — la misma frecuencia que cualquier router Wi-Fi doméstico.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /container -->
+  </section><!-- /#gallery -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        TU NOMBRE es un proyecto maker experimental y educativo y no un producto comercial.
+        No hay ninguna garantía de que sus estimaciones de diagnóstico sean fiables o que
+        funcione para un caso o distancia en particular. Consultar la legislación vigente
+        y usar solo en ámbitos privados, sin afectar dispositivos de terceros.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Botón ir arriba -->
+  <a href="#top" class="go-top smoothScroll"><i class="fa fa-angle-up"></i></a>
+
+  <!-- SCRIPTS -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.4/vegas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+</html>

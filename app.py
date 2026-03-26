@@ -12,36 +12,17 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# CSS base: oculta chrome de Streamlit y hace el iframe full-width
-st.markdown(
-    """
-    <style>
-    header, #MainMenu, footer { display: none !important; height: 0 !important; }
-
-    /* Streamlit 1.32+ */
-    section[data-testid="stMain"]           { padding: 0 !important; }
-    div[data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }
-    div[data-testid="stVerticalBlock"]      { gap: 0 !important; }
-
-    /* Versiones anteriores */
-    .block-container  { padding: 0 !important; max-width: 100% !important; }
-    section.main      { padding: 0 !important; }
-    .stApp            { margin-top: 0 !important; }
-
-    [data-testid="stSidebar"],
-    [data-testid="collapsedControl"] { display: none !important; }
-
-    iframe {
-        width: 100% !important;
-        border: none !important;
-        display: block !important;
-        margin: 0 !important;
-        vertical-align: top !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+# Mínimo CSS: evita flash de contenido Streamlit antes de que corra el script
+st.markdown("""
+<style>
+header, #MainMenu, footer { display: none !important; }
+body { overflow: hidden !important; margin: 0 !important; }
+.block-container, [data-testid="stMainBlockContainer"] {
+    padding: 0 !important; margin: 0 !important; max-width: 100% !important;
+}
+</style>
+""", unsafe_allow_html=True)
 
 html = prepare_page("index.html", BASE_DIR)
-components.html(html, height=8000, scrolling=False)
+# scrolling=True para que el iframe maneje su propio scroll interno
+components.html(html, height=600, scrolling=True)

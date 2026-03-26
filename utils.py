@@ -1,43 +1,40 @@
 """
-utils.py — helpers para convertir las páginas HTML estáticas
-en HTML autocontenido compatible con Streamlit components.html()
+utils.py — convierte HTML estático en páginas autocontenidas para Streamlit.
+El truco definitivo: el iframe se pone position:fixed sobre todo el viewport
+accediendo a window.parent (mismo origen que el host de Streamlit).
 """
 import re
 import base64
 from pathlib import Path
 
 
+# ---------------------------------------------------------------------------
+# Inline helpers
+# ---------------------------------------------------------------------------
+
 def inline_css(html: str, base_dir: Path) -> str:
-    """Reemplaza <link rel=stylesheet href="local.css"> con bloques <style> inline."""
     def repl(m):
         href = m.group(1)
         if href.startswith("http"):
-            return m.group(0)          # CDN: dejar tal cual
+            return m.group(0)
         p = base_dir / href
-        if p.exists():
-            return f"<style>\n{p.read_text(encoding='utf-8')}\n</style>"
-        return m.group(0)
+        return f"<style>\n{p.read_text(encoding='utf-8')}\n</style>" if p.exists() else m.group(0)
     return re.sub(r'<link[^>]+href="([^"]+\.css)"[^>]*/?\s*>', repl, html)
 
 
 def inline_js(html: str, base_dir: Path) -> str:
-    """Reemplaza <script src="local.js"></script> con el JS inline."""
     def repl(m):
         src = m.group(1)
         if src.startswith("http"):
-            return m.group(0)          # CDN: dejar tal cual
+            return m.group(0)
         p = base_dir / src
-        if p.exists():
-            return f"<script>\n{p.read_text(encoding='utf-8')}\n</script>"
-        return m.group(0)
+        return f"<script>\n{p.read_text(encoding='utf-8')}\n</script>" if p.exists() else m.group(0)
     return re.sub(r'<script\s+src="([^"]+)"[^>]*>\s*</script>', repl, html)
 
 
 def inline_svgs(html: str, base_dir: Path) -> str:
-    """Convierte src="images/*.svg" a data URIs base64."""
     def repl(m):
-        path = m.group(1)
-        p = base_dir / path
+        p = base_dir / m.group(1)
         if p.exists():
             b64 = base64.b64encode(p.read_bytes()).decode()
             return f'src="data:image/svg+xml;base64,{b64}"'
@@ -46,95 +43,83 @@ def inline_svgs(html: str, base_dir: Path) -> str:
 
 
 def fix_links(html: str) -> str:
-    """
-    Ajusta los hrefs internos para que naveguen el frame padre de Streamlit
-    y apunten a las rutas de las páginas Streamlit.
-    """
     pairs = [
-        ('href="index.html"',    'href="/"        target="_parent"'),
-        ('href="taller.html"',   'href="/Taller"  target="_parent"'),
-        ('href="manual.html"',   'href="/Manual"  target="_parent"'),
-        ('href="cantenna.html"', 'href="#"         target="_parent"'),
+        ('href="index.html"',    'href="/"       target="_parent"'),
+        ('href="taller.html"',   'href="/Taller" target="_parent"'),
+        ('href="cantenna.html"', 'href="#"        target="_parent"'),
     ]
     for old, new in pairs:
         html = html.replace(old, new)
     return html
 
 
-def add_streamlit_fixes(html: str) -> str:
-    """
-    Inyecta dos scripts en el HTML:
-    1. Reporta la altura real al iframe de Streamlit para auto-resize.
-    2. Inyecta CSS en el DOM padre (window.parent.document) para eliminar
-       el padding/header de Streamlit — funciona porque comparten origen.
-    """
-    script = """
+# ---------------------------------------------------------------------------
+# Script que toma control del viewport desde dentro del iframe
+# ---------------------------------------------------------------------------
+
+TAKEOVER_SCRIPT = """
 <script>
 (function () {
+  /* Hace que el body del iframe sea desplazable */
+  document.documentElement.style.height = '100vh';
+  document.documentElement.style.overflowY = 'auto';
+  document.documentElement.style.overflowX = 'hidden';
 
-  /* ---- 1. Eliminar padding del DOM padre (Streamlit chrome) ---- */
-  function fixParent() {
+  /* Reposiciona el iframe sobre todo el viewport de Streamlit */
+  function takeover() {
     try {
       var pd = window.parent.document;
       if (!pd) return;
 
-      /* Ocultar header y quitar el padding-top que genera */
-      var rules = [
-        'header { display: none !important; height: 0 !important; }',
-        /* Streamlit 1.32+ */
-        'section[data-testid="stMain"]          { padding-top: 0 !important; margin-top: 0 !important; }',
-        'div[data-testid="stMainBlockContainer"] { padding: 0 !important; max-width: 100% !important; }',
-        'div[data-testid="stVerticalBlock"]      { gap: 0 !important; }',
-        /* Versiones anteriores */
-        '.block-container { padding: 0 !important; max-width: 100% !important; }',
-        'section.main     { padding-top: 0 !important; }',
-        /* El iframe en sí */
-        'iframe { display: block !important; vertical-align: top !important; margin: 0 !important; }',
-      ];
-
-      var existing = pd.getElementById('__st_fix__');
-      if (!existing) {
+      /* Ocultar chrome de Streamlit */
+      if (!pd.getElementById('__st_hide__')) {
         var s = pd.createElement('style');
-        s.id = '__st_fix__';
-        s.innerHTML = rules.join('\\n');
+        s.id = '__st_hide__';
+        s.textContent = [
+          'header { display:none!important; }',
+          '#MainMenu { display:none!important; }',
+          'footer { display:none!important; }',
+          'body { overflow:hidden!important; margin:0!important; }',
+        ].join(' ');
         pd.head.appendChild(s);
       }
-    } catch(e) { /* cross-origin: ignorar */ }
+
+      /* Encontrar nuestro iframe y hacerlo fixed full-screen */
+      var frames = pd.querySelectorAll('iframe');
+      for (var i = 0; i < frames.length; i++) {
+        if (frames[i].contentWindow === window) {
+          frames[i].setAttribute('style',
+            'position:fixed!important;' +
+            'top:0!important;left:0!important;' +
+            'width:100vw!important;height:100vh!important;' +
+            'border:none!important;margin:0!important;' +
+            'padding:0!important;z-index:99999!important;'
+          );
+          break;
+        }
+      }
+    } catch (e) { /* cross-origin bloqueado: no hacer nada */ }
   }
 
-  /* ---- 2. Reportar altura real para auto-resize del iframe ---- */
-  function reportHeight() {
-    var h = Math.max(
-      document.body.scrollHeight,
-      document.documentElement.scrollHeight,
-      document.body.offsetHeight
-    );
-    window.parent.postMessage(
-      { isStreamlitMessage: true, type: "streamlit:setFrameHeight", height: h },
-      "*"
-    );
-  }
-
-  fixParent();
-  window.addEventListener("load", function () {
-    fixParent();
-    reportHeight();
-    setTimeout(function(){ fixParent(); reportHeight(); }, 600);
-    setTimeout(reportHeight, 2000);
-    setTimeout(reportHeight, 4000);
+  /* Ejecutar inmediatamente y repetir hasta que estabilice */
+  takeover();
+  var tid = setInterval(takeover, 80);
+  setTimeout(function () { clearInterval(tid); }, 4000);
+  window.addEventListener('load', function () {
+    takeover();
+    setTimeout(takeover, 300);
+    setTimeout(takeover, 800);
   });
-
 })();
-</script>"""
-    return html.replace("</body>", script + "\n</body>")
+</script>
+"""
 
 
 def prepare_page(html_file: str, base_dir: Path) -> str:
-    """Pipeline completo: lee HTML y lo deja autocontenido."""
     html = (base_dir / html_file).read_text(encoding="utf-8")
     html = inline_css(html, base_dir)
     html = inline_js(html, base_dir)
     html = inline_svgs(html, base_dir)
     html = fix_links(html)
-    html = add_streamlit_fixes(html)
+    html = html.replace("</body>", TAKEOVER_SCRIPT + "\n</body>")
     return html

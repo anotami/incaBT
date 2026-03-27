@@ -43,36 +43,59 @@ def inline_svgs(html: str, base_dir: Path) -> str:
 
 
 def fix_links(html: str) -> str:
-    pairs = [
-        ('href="index.html"',       'href="/"            target="_parent"'),
-        ('href="taller.html"',      'href="/Taller"      target="_parent"'),
-        ('href="inscripcion.html"', 'href="/Inscripcion" target="_parent"'),
-        ('href="cantenna.html"',    'href="#"             target="_parent"'),
-    ]
-    for old, new in pairs:
-        html = html.replace(old, new)
+    # Neutralizar links a páginas que no existen
+    html = html.replace('href="cantenna.html"', 'href="#"')
     return html
 
 
 # ---------------------------------------------------------------------------
-# Script que toma control del viewport desde dentro del iframe
+# Scripts inyectados en cada página
 # ---------------------------------------------------------------------------
 
+# Intercepta clicks en links internos y navega window.parent
+NAV_SCRIPT = """
+<script>
+(function () {
+  var NAV = {
+    'index.html':       '/',
+    'taller.html':      '/Taller',
+    'inscripcion.html': '/Inscripcion'
+  };
+
+  function handleClick(e) {
+    var el = e.target;
+    while (el && el.tagName !== 'A') el = el.parentElement;
+    if (!el) return;
+    var href = el.getAttribute('href') || '';
+    var fname = href.replace(/[?#].*$/, '').split('/').pop();
+    if (!NAV.hasOwnProperty(fname)) return;
+    e.preventDefault();
+    e.stopPropagation();
+    try {
+      window.parent.location.href = NAV[fname];
+    } catch (err) {
+      window.location.href = href;
+    }
+  }
+
+  document.addEventListener('click', handleClick, true);
+})();
+</script>
+"""
+
+# Toma control del viewport desde dentro del iframe
 TAKEOVER_SCRIPT = """
 <script>
 (function () {
-  /* Hace que el body del iframe sea desplazable */
   document.documentElement.style.height = '100vh';
   document.documentElement.style.overflowY = 'auto';
   document.documentElement.style.overflowX = 'hidden';
 
-  /* Reposiciona el iframe sobre todo el viewport de Streamlit */
   function takeover() {
     try {
       var pd = window.parent.document;
       if (!pd) return;
 
-      /* Ocultar chrome de Streamlit */
       if (!pd.getElementById('__st_hide__')) {
         var s = pd.createElement('style');
         s.id = '__st_hide__';
@@ -85,7 +108,6 @@ TAKEOVER_SCRIPT = """
         pd.head.appendChild(s);
       }
 
-      /* Encontrar nuestro iframe y hacerlo fixed full-screen */
       var frames = pd.querySelectorAll('iframe');
       for (var i = 0; i < frames.length; i++) {
         if (frames[i].contentWindow === window) {
@@ -99,10 +121,9 @@ TAKEOVER_SCRIPT = """
           break;
         }
       }
-    } catch (e) { /* cross-origin bloqueado: no hacer nada */ }
+    } catch (e) {}
   }
 
-  /* Ejecutar inmediatamente y repetir hasta que estabilice */
   takeover();
   var tid = setInterval(takeover, 80);
   setTimeout(function () { clearInterval(tid); }, 4000);
@@ -122,5 +143,5 @@ def prepare_page(html_file: str, base_dir: Path) -> str:
     html = inline_js(html, base_dir)
     html = inline_svgs(html, base_dir)
     html = fix_links(html)
-    html = html.replace("</body>", TAKEOVER_SCRIPT + "\n</body>")
+    html = html.replace("</body>", NAV_SCRIPT + TAKEOVER_SCRIPT + "\n</body>")
     return html

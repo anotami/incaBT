@@ -1,7 +1,12 @@
 """
 utils.py — prepara HTML estático para Streamlit.
-Navegación: window.top.location.href con query params (?p=xxx).
-Viewport takeover: el iframe se pone position:fixed sobre todo el viewport.
+
+Navegación (problema resuelto):
+  El iframe de components.html() tiene sandbox sin allow-top-navigation,
+  entonces window.top/parent.location.href falla silenciosamente.
+  Solución: postMessage desde el iframe + listener inyectado en el
+  parent por TAKEOVER_SCRIPT (que ya tiene acceso al DOM del parent
+  gracias a allow-same-origin).
 """
 import re
 import base64
@@ -46,9 +51,8 @@ def inline_svgs(html: str, base_dir: Path) -> str:
 # Scripts inyectados en cada página
 # ---------------------------------------------------------------------------
 
-# Intercepta clicks en links internos y navega window.top con query params.
-# window.top funciona siempre: navega el tab completo del browser,
-# sin depender de same-origin con el parent de Streamlit.
+# 1. Interceptor de clicks: envía postMessage al parent en vez de navegar
+#    directamente (el iframe no tiene allow-top-navigation).
 NAV_SCRIPT = """
 <script>
 (function () {
@@ -64,7 +68,6 @@ NAV_SCRIPT = """
     if (!el) return;
 
     var href = el.getAttribute('href') || '';
-    /* Ignorar anclas internas y mailto */
     if (href.charAt(0) === '#' || href.indexOf('mailto:') === 0) return;
 
     var fname = href.replace(/[?#].*$/, '').split('/').pop();
@@ -72,13 +75,18 @@ NAV_SCRIPT = """
 
     e.preventDefault();
     e.stopPropagation();
-    window.top.location.href = NAV[fname];
+
+    /* postMessage al parent; el listener inyectado por TAKEOVER hace
+       la navegación real desde el contexto del parent window */
+    try {
+      window.parent.postMessage({ __cbt_nav__: NAV[fname] }, '*');
+    } catch (err) {}
   }, true);
 })();
 </script>
 """
 
-# Toma control del viewport desde dentro del iframe de Streamlit.
+# 2. Takeover + inyección del listener de navegación en el parent.
 TAKEOVER_SCRIPT = """
 <script>
 (function () {
@@ -91,6 +99,7 @@ TAKEOVER_SCRIPT = """
       var pd = window.parent.document;
       if (!pd) return;
 
+      /* Ocultar chrome de Streamlit */
       if (!pd.getElementById('__st_hide__')) {
         var s = pd.createElement('style');
         s.id = '__st_hide__';
@@ -102,6 +111,21 @@ TAKEOVER_SCRIPT = """
         pd.head.appendChild(s);
       }
 
+      /* Inyectar listener de navegación en el parent (una sola vez).
+         El parent SÍ puede navegar window.location libremente. */
+      if (!pd.getElementById('__st_nav__')) {
+        var ns = pd.createElement('script');
+        ns.id = '__st_nav__';
+        ns.textContent =
+          'window.addEventListener("message", function(e){' +
+          '  if(e.data && e.data.__cbt_nav__){' +
+          '    window.location.href = e.data.__cbt_nav__;' +
+          '  }' +
+          '});';
+        pd.head.appendChild(ns);
+      }
+
+      /* Iframe fixed full-screen */
       var frames = pd.querySelectorAll('iframe');
       for (var i = 0; i < frames.length; i++) {
         if (frames[i].contentWindow === window) {
@@ -135,7 +159,6 @@ def prepare_page(html_file: str, base_dir: Path) -> str:
     html = inline_css(html, base_dir)
     html = inline_js(html, base_dir)
     html = inline_svgs(html, base_dir)
-    # Reemplazar href de cantenna (página inexistente)
     html = html.replace('href="cantenna.html"', 'href="#"')
     html = html.replace("</body>", NAV_SCRIPT + TAKEOVER_SCRIPT + "\n</body>")
     return html

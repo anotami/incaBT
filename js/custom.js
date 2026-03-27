@@ -133,7 +133,11 @@ $(document).ready(function () {
     $('#ft-success').show();
 
     setTimeout(function () {
-      window.location.href = mailto;
+      var a = document.createElement('a');
+      a.href = mailto;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
     }, 800);
   });
 

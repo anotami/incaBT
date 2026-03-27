@@ -32,6 +32,58 @@ $(document).ready(function () {
   });
 
   /* =====================================================
+     SMOOTH SCROLL
+  ===================================================== */
+  $('.smoothScroll').on('click', function (e) {
+    var target = this.hash;
+    if (!target || target === '#') return;
+    var $target = $(target);
+    if ($target.length) {
+      e.preventDefault();
+      $('html, body').animate({ scrollTop: $target.offset().top - 56 }, 700, 'swing');
+    }
+  });
+
+  /* =====================================================
+     FORMULARIO INSCRIPCIÓN TALLER
+  ===================================================== */
+  $('#formTallerPage').on('submit', function (e) {
+    e.preventDefault();
+
+    var nombre  = $('#tfp-nombre').val().trim();
+    var email   = $('#tfp-email').val().trim();
+    var pais    = $('#tfp-pais').val().trim();
+    var version = $('#tfp-version').val();
+    var mensaje = $('#tfp-mensaje').val().trim();
+
+    if (!nombre || !email) return;
+
+    var versionTexto = version === 'si'
+      ? 'Sí, tengo versión anterior (solicito 50% dto.)'
+      : 'No, es mi primera vez';
+
+    var cuerpo = [
+      'Nombre: ' + nombre,
+      'Email: ' + email,
+      'País/Ciudad: ' + (pais || 'No especificado'),
+      'Versión anterior: ' + versionTexto,
+      '',
+      'Mensaje:',
+      mensaje || '(sin mensaje adicional)'
+    ].join('\n');
+
+    var mailto = 'mailto:acordatemidire@gmail.com'
+      + '?subject=' + encodeURIComponent('Inscripción taller CALLADO BT — ' + nombre)
+      + '&body='    + encodeURIComponent(cuerpo);
+
+    $('#taller-form-success').show();
+
+    setTimeout(function () {
+      window.location.href = mailto;
+    }, 800);
+  });
+
+  /* =====================================================
      NAVBAR COLLAPSE ON MOBILE LINK CLICK
   ===================================================== */
   $('.navbar-nav a').on('click', function () {

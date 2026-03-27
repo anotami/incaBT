@@ -44,9 +44,10 @@ def inline_svgs(html: str, base_dir: Path) -> str:
 
 def fix_links(html: str) -> str:
     pairs = [
-        ('href="index.html"',    'href="/"       target="_parent"'),
-        ('href="taller.html"',   'href="/Taller" target="_parent"'),
-        ('href="cantenna.html"', 'href="#"        target="_parent"'),
+        ('href="index.html"',       'href="/"            target="_parent"'),
+        ('href="taller.html"',      'href="/Taller"      target="_parent"'),
+        ('href="inscripcion.html"', 'href="/Inscripcion" target="_parent"'),
+        ('href="cantenna.html"',    'href="#"             target="_parent"'),
     ]
     for old, new in pairs:
         html = html.replace(old, new)

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscripción al Taller — CALLADO BT</title>
+
+  <!-- Bootstrap 3 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    html, body {
+      background: #0a1520;
+      color: #fff;
+      font-family: 'Source Sans Pro', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .insc-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 40px;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(46,134,222,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 70%, rgba(231,76,60,0.10) 0%, transparent 60%),
+        #0a1520;
+    }
+
+    .insc-back {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .insc-back:hover { color: #fff; text-decoration: none; }
+    .insc-back i { margin-right: 6px; }
+
+    .insc-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      padding: 40px 44px;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .insc-logo {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #2e86de;
+      margin-bottom: 10px;
+    }
+
+    .insc-title {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      margin: 0 0 6px;
+    }
+
+    .insc-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 28px;
+    }
+
+    .insc-box .form-group label {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .insc-box .form-control {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      border-radius: 6px;
+      font-size: 15px;
+      padding: 10px 14px;
+      height: auto;
+      box-shadow: none;
+      transition: border-color 0.2s;
+    }
+    .insc-box .form-control::placeholder { color: rgba(255,255,255,0.3); }
+    .insc-box .form-control:focus {
+      border-color: #e74c3c;
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 0 0 3px rgba(231,76,60,0.15);
+      color: #fff;
+      outline: none;
+    }
+    .insc-box select.form-control option { background: #1a252f; color: #fff; }
+
+    .insc-submit {
+      width: 100%;
+      margin-top: 10px;
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 14px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .insc-submit:hover { background: #c0392b; }
+
+    /* Panel de confirmación */
+    #insc-confirm { display: none; }
+
+    .insc-confirm-box {
+      background: rgba(39,174,96,0.08);
+      border: 1px solid rgba(39,174,96,0.4);
+      border-radius: 10px;
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .insc-confirm-box i {
+      font-size: 36px;
+      color: #2ecc71;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .insc-confirm-box h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px;
+    }
+    .insc-confirm-box p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 20px;
+    }
+    .insc-confirm-box .btn-mailto {
+      display: inline-block;
+      background: #e74c3c;
+      color: #fff;
+      border-radius: 6px;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .insc-confirm-box .btn-mailto:hover { background: #c0392b; color: #fff; text-decoration: none; }
+
+    .insc-alt {
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+    .insc-alt a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .insc-box { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="insc-page">
+    <a href="taller.html" class="insc-back"><i class="fa fa-arrow-left"></i> Volver al taller</a>
+
+    <div class="insc-box">
+      <p class="insc-logo">CALLADO BT</p>
+      <h1 class="insc-title">Inscripción</h1>
+      <p class="insc-subtitle">Completá el formulario y te respondemos en menos de 24 hs.</p>
+
+      <!-- FORMULARIO -->
+      <div id="insc-form">
+        <form id="formInscripcion" novalidate>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="fi-nombre">Nombre *</label>
+                <input type="text" class="form-control" id="fi-nombre" placeholder="Tu nombre" required>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="fi-email">Email *</label>
+                <input type="email" class="form-control" id="fi-email" placeholder="tu@email.com" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="fi-pais">País / Ciudad</label>
+                <input type="text" class="form-control" id="fi-pais" placeholder="Argentina, Buenos Aires…">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label for="fi-version">¿Versión anterior?</label>
+                <select class="form-control" id="fi-version">
+                  <option value="no">No, es mi primera vez</option>
+                  <option value="si">Sí (pido 50% de descuento)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fi-mensaje">Mensaje (opcional)</label>
+            <textarea class="form-control" id="fi-mensaje" rows="3" placeholder="Consultas, forma de pago, etc."></textarea>
+          </div>
+          <div id="fi-error" style="display:none; color:#e74c3c; font-size:13px; margin-bottom:10px;">
+            Completá nombre y email para continuar.
+          </div>
+          <button type="submit" class="insc-submit">
+            <i class="fa fa-check"></i> &nbsp;Preparar inscripción
+          </button>
+        </form>
+      </div>
+
+      <!-- CONFIRMACIÓN -->
+      <div id="insc-confirm">
+        <div class="insc-confirm-box">
+          <i class="fa fa-envelope-o"></i>
+          <h4>¡Todo listo!</h4>
+          <p>Hacé click en el botón para abrir tu cliente de email con el mensaje ya armado. Solo tenés que enviarlo.</p>
+          <a id="insc-mailto-btn" href="#" class="btn-mailto">
+            <i class="fa fa-envelope"></i> &nbsp;Abrir email y enviar
+          </a>
+          <div class="insc-alt">
+            O escribí directamente a <a href="mailto:acordatemidire@gmail.com">acordatemidire@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /insc-box -->
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $('#formInscripcion').on('submit', function (e) {
+      e.preventDefault();
+
+      var nombre  = $('#fi-nombre').val().trim();
+      var email   = $('#fi-email').val().trim();
+      var pais    = $('#fi-pais').val().trim();
+      var version = $('#fi-version').val();
+      var mensaje = $('#fi-mensaje').val().trim();
+
+      if (!nombre || !email) {
+        $('#fi-error').show();
+        return;
+      }
+      $('#fi-error').hide();
+
+      var versionTexto = version === 'si'
+        ? 'Sí, tengo versión anterior (solicito 50% dto.)'
+        : 'No, es mi primera vez';
+
+      var cuerpo = [
+        'Nombre: '           + nombre,
+        'Email: '            + email,
+        'País/Ciudad: '      + (pais || 'No especificado'),
+        'Versión anterior: ' + versionTexto,
+        '',
+        'Mensaje:',
+        mensaje || '(sin mensaje adicional)'
+      ].join('\n');
+
+      var mailto = 'mailto:acordatemidire@gmail.com'
+        + '?subject=' + encodeURIComponent('Inscripción taller CALLADO BT — ' + nombre)
+        + '&body='    + encodeURIComponent(cuerpo);
+
+      $('#insc-mailto-btn').attr('href', mailto);
+      $('#insc-form').hide();
+      $('#insc-confirm').show();
+    });
+  </script>
+</body>
+</html>

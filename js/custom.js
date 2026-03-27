@@ -98,4 +98,43 @@ $(document).ready(function () {
     }
   });
 
+  /* =====================================================
+     MODAL TALLER — envío por mailto
+  ===================================================== */
+  $('#formTaller').on('submit', function (e) {
+    e.preventDefault();
+
+    var nombre  = $('#ft-nombre').val().trim();
+    var email   = $('#ft-email').val().trim();
+    var pais    = $('#ft-pais').val().trim();
+    var version = $('#ft-version').val();
+    var mensaje = $('#ft-mensaje').val().trim();
+
+    if (!nombre || !email) return;
+
+    var versionTexto = version === 'si'
+      ? 'Sí, tengo versión anterior (solicito 50% dto.)'
+      : 'No, es mi primera vez';
+
+    var cuerpo = [
+      'Nombre: ' + nombre,
+      'Email: ' + email,
+      'País/Ciudad: ' + (pais || 'No especificado'),
+      'Versión anterior: ' + versionTexto,
+      '',
+      'Mensaje:',
+      mensaje || '(sin mensaje adicional)'
+    ].join('\n');
+
+    var mailto = 'mailto:acordatemidire@gmail.com'
+      + '?subject=' + encodeURIComponent('Consulta taller CALLADO BT — ' + nombre)
+      + '&body='    + encodeURIComponent(cuerpo);
+
+    $('#ft-success').show();
+
+    setTimeout(function () {
+      window.location.href = mailto;
+    }, 800);
+  });
+
 });

@@ -1,7 +1,7 @@
 """
-utils.py — convierte HTML estático en páginas autocontenidas para Streamlit.
-El truco definitivo: el iframe se pone position:fixed sobre todo el viewport
-accediendo a window.parent (mismo origen que el host de Streamlit).
+utils.py — prepara HTML estático para Streamlit.
+Navegación: window.top.location.href con query params (?p=xxx).
+Viewport takeover: el iframe se pone position:fixed sobre todo el viewport.
 """
 import re
 import base64
@@ -42,48 +42,43 @@ def inline_svgs(html: str, base_dir: Path) -> str:
     return re.sub(r'src="(images/[^"]+\.svg)"', repl, html)
 
 
-def fix_links(html: str) -> str:
-    # Neutralizar links a páginas que no existen
-    html = html.replace('href="cantenna.html"', 'href="#"')
-    return html
-
-
 # ---------------------------------------------------------------------------
 # Scripts inyectados en cada página
 # ---------------------------------------------------------------------------
 
-# Intercepta clicks en links internos y navega window.parent
+# Intercepta clicks en links internos y navega window.top con query params.
+# window.top funciona siempre: navega el tab completo del browser,
+# sin depender de same-origin con el parent de Streamlit.
 NAV_SCRIPT = """
 <script>
 (function () {
   var NAV = {
-    'index.html':       '/',
-    'taller.html':      '/Taller',
-    'inscripcion.html': '/Inscripcion'
+    'index.html':       '/?p=index',
+    'taller.html':      '/?p=taller',
+    'inscripcion.html': '/?p=inscripcion'
   };
 
-  function handleClick(e) {
+  document.addEventListener('click', function (e) {
     var el = e.target;
     while (el && el.tagName !== 'A') el = el.parentElement;
     if (!el) return;
+
     var href = el.getAttribute('href') || '';
+    /* Ignorar anclas internas y mailto */
+    if (href.charAt(0) === '#' || href.indexOf('mailto:') === 0) return;
+
     var fname = href.replace(/[?#].*$/, '').split('/').pop();
     if (!NAV.hasOwnProperty(fname)) return;
+
     e.preventDefault();
     e.stopPropagation();
-    try {
-      window.parent.location.href = NAV[fname];
-    } catch (err) {
-      window.location.href = href;
-    }
-  }
-
-  document.addEventListener('click', handleClick, true);
+    window.top.location.href = NAV[fname];
+  }, true);
 })();
 </script>
 """
 
-# Toma control del viewport desde dentro del iframe
+# Toma control del viewport desde dentro del iframe de Streamlit.
 TAKEOVER_SCRIPT = """
 <script>
 (function () {
@@ -99,12 +94,11 @@ TAKEOVER_SCRIPT = """
       if (!pd.getElementById('__st_hide__')) {
         var s = pd.createElement('style');
         s.id = '__st_hide__';
-        s.textContent = [
-          'header { display:none!important; }',
-          '#MainMenu { display:none!important; }',
-          'footer { display:none!important; }',
-          'body { overflow:hidden!important; margin:0!important; }',
-        ].join(' ');
+        s.textContent =
+          'header{display:none!important;}' +
+          '#MainMenu{display:none!important;}' +
+          'footer{display:none!important;}' +
+          'body{overflow:hidden!important;margin:0!important;}';
         pd.head.appendChild(s);
       }
 
@@ -112,8 +106,7 @@ TAKEOVER_SCRIPT = """
       for (var i = 0; i < frames.length; i++) {
         if (frames[i].contentWindow === window) {
           frames[i].setAttribute('style',
-            'position:fixed!important;' +
-            'top:0!important;left:0!important;' +
+            'position:fixed!important;top:0!important;left:0!important;' +
             'width:100vw!important;height:100vh!important;' +
             'border:none!important;margin:0!important;' +
             'padding:0!important;z-index:99999!important;'
@@ -142,6 +135,7 @@ def prepare_page(html_file: str, base_dir: Path) -> str:
     html = inline_css(html, base_dir)
     html = inline_js(html, base_dir)
     html = inline_svgs(html, base_dir)
-    html = fix_links(html)
+    # Reemplazar href de cantenna (página inexistente)
+    html = html.replace('href="cantenna.html"', 'href="#"')
     html = html.replace("</body>", NAV_SCRIPT + TAKEOVER_SCRIPT + "\n</body>")
     return html
